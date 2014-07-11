@@ -1,6 +1,7 @@
 package myapplication.matthewli.example.com.stoplight;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +15,9 @@ public class MyActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
-        findViewById(R.id.my_button).setOnClickListener(this);
+        findViewById(R.id.redButton).setOnClickListener(this);
+        findViewById(R.id.greenButton).setOnClickListener(this);
+        findViewById(R.id.yellowButton).setOnClickListener(this);
     }
 
 
@@ -39,10 +42,25 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.my_button) {
-            TextView tv = (TextView) findViewById(R.id.displayed_text);
-            tv.setText("Clicked!");
+
+        int id = v.getId();
+
+        String output = "";
+        TextView tv = (TextView) findViewById(R.id.displayed_text);
+
+
+        switch(id) {
+            case R.id.redButton:
+                output = "STOP!"; tv.setBackgroundColor(Color.RED);break;
+            case R.id.yellowButton:
+                output = "SLOW DOWN!"; tv.setBackgroundColor(Color.YELLOW);break;
+            case R.id.greenButton:
+                output = "GOO!"; tv.setBackgroundColor(Color.GREEN);
         }
+
+        tv.setText(output);
+
+
     }
 
 }
